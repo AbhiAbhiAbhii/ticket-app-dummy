@@ -1,0 +1,8 @@
+{
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorStyle": "line",
+    "editor.cursorSurroundingLines": 0,
+    "editor.cursorSurroundingLinesStyle": "default",
+    "editor.fontSize": 14,
+    "workbench.iconTheme": "material-icon-theme"
+}
