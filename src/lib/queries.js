@@ -24,7 +24,6 @@ export const editTicket = async (id, formData) => {
 
 }
 
-
 export const getTicketById = async (id) => {
     const res = await Ticket.findById(id)
     return res

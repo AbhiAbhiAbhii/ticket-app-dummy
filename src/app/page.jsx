@@ -1,22 +1,33 @@
+"use client"
 import TicketCard from '@/components/TicketCard'
 import { getTickets } from '@/lib/queries'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 
-const DashBoard = async () => {
+const DashBoard = () => {
 
-  const tickets = await getTickets()
+  const [ allTickets, setAllTickets ] = useState()
 
   const uniqueCategories = [
-    ...new Set(tickets?.map(({category}) => category))
+    ...new Set(allTickets?.map(({category}) => category))
   ]
+
+  useEffect(() => {
+    const fetchingTicketData = async () => {
+      const ticket = await getTickets()
+      setAllTickets(() => {
+        return ticket
+      })
+    }
+    fetchingTicketData()
+  }, [])
 
   return (
     <div
       className="p-5"
     >
       {
-      tickets && uniqueCategories.map((uniqueCategory, categoryIndex) => (
+      allTickets && uniqueCategories.map((uniqueCategory, categoryIndex) => (
         <div
           key={categoryIndex}
           className="mb-4"
@@ -26,7 +37,7 @@ const DashBoard = async () => {
             className="lg:grid grid-cols-2 xl:grid-cols-4"
           >
             {
-              tickets.filter((ticket) => ticket.category === uniqueCategory).map((filteredTicket, _index) => (
+              allTickets.filter((ticket) => ticket.category === uniqueCategory).map((filteredTicket, _index) => (
                 <TicketCard 
                   id={_index}
                   key={_index}
